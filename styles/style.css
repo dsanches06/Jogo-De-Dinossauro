@@ -1,7 +1,11 @@
+body {
+  background: #fafafa;
+}
+
 .dino {
   width: 60px;
   height: 60px;
-  background: green;
+  background-image: url(/img/dino.png);
   position: absolute;
   bottom: 0;
 }
@@ -9,9 +13,34 @@
 .cactus {
   width: 60px;
   height: 60px;
-  background: red;
+  background-image: url(/img/cactus.png);
   position: absolute;
   bottom: 0;
 }
 
+.game-over {
+  text-align: center;
+  color: #666666;
+  margin-top: 50px;
+  font-family: "Trebuchet MS";
+}
 
+/*para definir etapas de uma animação com css*/
+@keyframes slideright {
+  from {
+    background-position: 70000%;
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+.background {
+  position: absolute;
+  bottom: 0;
+  background-image: url(/img/background.png);
+  background-repeat: repeat-x; /*repetir infinito na horizontal*/
+  animation: slideright 600s infinite linear; /* criar animação */
+  width: 100%;
+  height: 200px;
+}
