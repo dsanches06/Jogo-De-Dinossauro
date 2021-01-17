@@ -1,5 +1,6 @@
 const dino = document.querySelector(".dino");
 const background = document.querySelector(".background");
+let position = 0;
 let isJumping = false;
 
 /**
@@ -17,8 +18,7 @@ function handleKeyUP(event) {
  *  Função jump que pernite o dinossauro saltar
  */
 function jump() {
-  //em baixo
-  let position = 0;
+  //saltou
   isJumping = true;
 
   let upInterval = setInterval(() => {
@@ -50,30 +50,36 @@ function jump() {
 function createCactus() {
   const cactus = document.createElement("div");
   //na direita
-  let position = 1000;
+  let positionCactus = 1000;
   let randomTime = Math.random() * 6000;
 
   //adicionar uma class ao div
   cactus.classList.add("cactus");
   //posicionar na direita
-  cactus.style.left = position + "px";
+  cactus.style.left = positionCactus + "px";
   //adicionar um elemento html
   background.appendChild(cactus);
 
   let leftInterval = setInterval(() => {
     //mover para esquerda
-    position -= 5;
-    cactus.style.left = position + "px";
+    positionCactus -= 5;
+    cactus.style.left = positionCactus + "px";
     //se for menor que -60
-    if (position < -60) {
+    if (positionCactus < -60) {
       //reseta o intervalo
       clearInterval(leftInterval);
       //remove o elemento catcus
       background.removeChild(cactus);
+      //se a posição de cactus for maior que zero e menor que 60 e ainda posição do dino for  menor que 60
+    } else if (positionCactus > 0 && positionCactus < 60 && position < 60) {
+      //limpa o intervalo
+      clearInterval(leftInterval);
+      //limpa o body e mostra a mensagem
+      document.body.innerHTML = '<h1 class="game-over">Fim de jogo</h1>';
     } else {
       //mover para esquerda
-      position -= 5;
-      cactus.style.left = position + "px";
+      positionCactus -= 5;
+      cactus.style.left = positionCactus + "px";
     }
   }, 20);
 
