@@ -51,12 +51,34 @@ function createCactus() {
   const cactus = document.createElement("div");
   //na direita
   let position = 1000;
+  let randomTime = Math.random() * 6000;
+
   //adicionar uma class ao div
   cactus.classList.add("cactus");
   //posicionar na direita
-  cactus.style.left = 1000 + "px";
+  cactus.style.left = position + "px";
   //adicionar um elemento html
   background.appendChild(cactus);
+
+  let leftInterval = setInterval(() => {
+    //mover para esquerda
+    position -= 5;
+    cactus.style.left = position + "px";
+    //se for menor que -60
+    if (position < -60) {
+      //reseta o intervalo
+      clearInterval(leftInterval);
+      //remove o elemento catcus
+      background.removeChild(cactus);
+    } else {
+      //mover para esquerda
+      position -= 5;
+      cactus.style.left = position + "px";
+    }
+  }, 20);
+
+  //serve para executar uma função de um certo tempo
+  setTimeout(createCactus, randomTime);
 }
 
 /**
